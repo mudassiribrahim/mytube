@@ -1,0 +1,15 @@
+{
+  "name": "mytube",
+  "version": "1.0.0",
+  "description": "backend project of vedio web platform like youtube",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "backend",
+    "node"
+  ],
+  "author": "mudassir ibrahim",
+  "license": "ISC"
+}
