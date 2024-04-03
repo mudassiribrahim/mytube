@@ -15,6 +15,7 @@ const userSchema = new Schema(
         id: {
             type: String,
             required: true,
+            unique: true,
         },
         email: {
             type: String,
@@ -58,5 +59,30 @@ userSchema.pre('save', async function (next) {
 
 userSchema.methods.isPasswordCorrect = async function (password) {
     bcrypt.compare(password, this.password);
+};
+
+userSchema.methods.genrateAccessToken = async function () {
+    return await jwt.sing(
+        {
+            id: this.id,
+            userName: this.userName,
+            email: this.email,
+            fullName: this.fullName,
+        },
+        {
+            expiresIn: process.eventNames.ACCESS_SECRET_EXPIRY,
+        }
+    );
+};
+userSchema.methods.genrateRefreshToken = async function () {
+    return await jwt.sing(
+        {
+            id: this.id,
+            userName: this.userName,
+        },
+        {
+            expiresIn: REFRESH_SRCRET_EXPIRY,
+        }
+    );
 };
 export const User = mongoose.model('User', userSchema);
