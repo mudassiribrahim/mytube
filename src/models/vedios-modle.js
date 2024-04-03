@@ -37,7 +37,9 @@ const vedioSchema = new Schema(
             type: String,
         },
     },
-    {}
+    {
+        timestamps:true
+    }
 );
 
 vedioSchema.plugin(AggregatePeginate);
