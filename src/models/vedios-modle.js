@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
+import { AggregatePeginate } from 'mongoose-aggregate-paginate-v2';
 
 const vedioSchema = new Schema(
     {
@@ -39,4 +40,5 @@ const vedioSchema = new Schema(
     {}
 );
 
+vedioSchema.plugin(AggregatePeginate);
 export const vedios = mongoose.model('User', vedioSchema);
