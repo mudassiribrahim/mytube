@@ -24,10 +24,10 @@ const userSchema = new Schema(
             trim: true,
             lowecase: true,
         },
-        watchHistory: {
+        watchHistory:[ {
             type: Schema.Types.ObjectId,
             ref: 'vedios',
-        },
+        }],
         fullName: {
             type: String,
             trim: true,
