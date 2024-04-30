@@ -9,10 +9,11 @@ cloudinary.config({
 
 const uploadAtCloudinary = async (filePath) => {
     try {
-        if (!filePath) throw new Error('file path is missing ');
+        if (!filePath) return null;
         const response = await cloudinary.uploader.upload(filePath, {
             resource_type: 'auto',
         });
+        fs.unlinkSync(filePath)
         return response;
     } catch (error) {
         fs.unlinkSync(filePath);

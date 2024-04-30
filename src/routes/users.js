@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { userRegister } from '../controllers/users-controller.js';
+import { userRegister } from '../controllers/user-controller.js';
 import { upload } from '../middlewares/multer_middelware.js';
 
 const router = Router();
@@ -11,7 +11,7 @@ router.route('/register').post(
             maxCount: 1
         },
         {
-            nmae : 'coverImage',
+            name : 'coverImage',
             maxCount: 1
         }
 

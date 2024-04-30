@@ -3,9 +3,9 @@ import connectDb from './db/db-connection.js';
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import userRouter from './routes/users-route.js';
+import userRouter from './routes/users.js';
 dotenv.config({
-    patht: './env',
+    patht: './.env',
 });
 
 const app = express();

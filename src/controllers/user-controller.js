@@ -1,12 +1,12 @@
 import asyncHandler from '../utils/asyncHandler.js';
 import { ApiError } from '../utils/ApiError.js';
-import { User } from '../models/user-models.js';
+import { User } from '../schema/users.js';
 import { uploadAtCloudinary } from '../services/couldinary.js';
-import { ApiResponse } from '../utils/ApiResponse.js';
+import { createUser } from '../models/users.js';
 
 const userRegister = asyncHandler(async (req, res) => {
     const { fullName, email, password, userName } = req.body;
-    const existingUser = User.findOne($or[({ userName }, { email })]);
+    const existingUser = await User.findOne({ userName });
     const localAvatarPath = req.files?.avatar[0].path;
     const localCoverImagePath = req.files?.coverImage.path;
 
@@ -22,17 +22,8 @@ const userRegister = asyncHandler(async (req, res) => {
     const coverimage = await uploadAtCloudinary(localCoverImagePath);
 
     if (!avatar) throw new ApiError(400, 'avatar file is required');
-    const user = await User.create({
-        fullName,
-        coverimage: coverimage?.url || '',
-        avatar: avatar.url,
-        email,
-        userName: userName.toUpperCase(),
-    });
-    const createdUser = await User.findById(user._id).select('-password -refreshToken');
-    if (!createdUser) throw new ApiError(500, 'some thing went wrong while creating user');
 
-    return res.status(201).json(new ApiResponse(200, createdUser, 'user added'));
+    return await createUser(fullName,coverimage,avatar,email,userName,password);
 });
 
 export { userRegister };
