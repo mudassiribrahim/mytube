@@ -2,7 +2,7 @@ import asyncHandler from '../utils/asyncHandler.js';
 import { ApiError } from '../utils/ApiError.js';
 import { User } from '../schema/users.js';
 import { uploadAtCloudinary } from '../services/couldinary.js';
-import { createUser } from '../models/users.js';
+import { createUserData } from '../models/users.js';
 
 const userRegister = asyncHandler(async (req, res) => {
     const { fullName, email, password, userName } = req.body;
@@ -23,7 +23,7 @@ const userRegister = asyncHandler(async (req, res) => {
 
     if (!avatar) throw new ApiError(400, 'avatar file is required');
 
-    return await createUser(fullName,coverimage,avatar,email,userName,password);
+    return await createUserData(fullName,coverimage,avatar,email,userName,password);
 });
 
 export { userRegister };
