@@ -8,8 +8,12 @@ const userRegister = asyncHandler(async (req, res) => {
     const { fullName, email, password, userName } = req.body;
     const existingUser = await User.findOne({ userName });
     const localAvatarPath = req.files?.avatar[0].path;
-    const localCoverImagePath = req.files?.coverImage.path;
+    
+    let  localCoverImagePath;
 
+    if(req.files && Array.isArray(req.files?.coverImage)&& req.files.coverImage.length > 0){
+        localCoverImagePath = req.files?.coverImage[0].path;
+    }
     if ([fullName, email, password, userName].some((find) => find?.trim() === '')) {
         throw new ApiError(400, 'All feild are required');
     }
