@@ -1,4 +1,6 @@
-import { User } from "../schema/users"
+import { User } from "../schema/users.js"
+import asyncHandler from "../utils/asyncHandler.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 const loggedOutUser = asyncHandler(async (req, res) => {
     await User.findByIdAndUpdate(

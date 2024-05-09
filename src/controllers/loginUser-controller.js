@@ -1,6 +1,6 @@
-import { User } from '../schema/users';
-import { ApiError } from '../utils/ApiError';
-import asyncHandler from '../utils/asyncHandler';
+import { User } from '../schema/users.js';
+import { ApiError } from '../utils/ApiError.js';
+import asyncHandler from '../utils/asyncHandler.js';
 
 const generateAccessAndRefreshToken = async (userId) => {
     try {
