@@ -22,7 +22,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 const loginUser = asyncHandler(async (req, res) => {
     const { userName, password, email } = req.body;
 
-    if (!(userName || email)) throw new ApiError(400, 'userName or email is required');
+    if (!userName && !email) throw new ApiError(400, 'userName or email is required');
 
     const user = await User.findOne({ $or: [{ userName }, { email }] });
 
